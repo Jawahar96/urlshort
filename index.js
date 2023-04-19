@@ -7,11 +7,12 @@ const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
 
+const url =('mongodb://localhost:27017/myUrlShortener')
 
 
-mongoose.connect("mongodb://localhost:27017/myUrlShortener");
 
 const { UrlModel } = require('./models/urlshort')
+const { MongoClient } = require('mongodb')
 
 // middleware
 app.use(express.static('public'))
