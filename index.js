@@ -7,9 +7,9 @@ const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
 
-const DB='myUrlShortener'
 
-mongoose.connect("mongodb+srv://jawaharsabesan:63EPXZmgxVcFuVXh@cluster0.n6dtkg8.mongodb.net/?retryWrites=true&w=majority");
+
+mongoose.connect("mongodb://localhost:27017/myUrlShortener");
 
 const { UrlModel } = require('./models/urlshort')
 
@@ -45,7 +45,7 @@ app.post('/create', function (req, res) {
 })
 app.get('/:urlId', function (req, res) {
 
-    let urlshort = UrlModel.findOne({ shortUrl: req.params.urlId }, function (err, data) {
+     UrlModel.findOne({ shortUrl: req.params.urlId }, function (err, data) {
         if (err) throw err
 
         UrlModel.findByIdAndUpdate({ _id: data.id }, { $inc: { clickCount: 1 } }, function (err, updateddata) {
