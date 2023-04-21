@@ -2,12 +2,12 @@ const express = require('express')
 
 const app = express()
 
-const PORT = process.env.PORT || 3001
+
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose')
 
-const url =('mongodb://localhost:27017/myUrlShortener')
+const url =('mongodb://localhost:27017')
 
 
 
@@ -65,9 +65,7 @@ app.get('/delete/:id', function (req, res) {
 })
 
 
-app.listen(PORT, () => {
-    console.log(`SERVER IS RUNNING ON THE PORT ${PORT}`);
-})
+app.listen(process.env.PORT || 3000)
 
 function generateUrl() {
 
