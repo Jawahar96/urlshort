@@ -26,12 +26,12 @@ app.get('/', async function (req, res) {
             urlResult: result
             
         })
- console.log(allUrl)
+
     })
 
 })
 
-app.post('/create',  function (req, res) {
+app.post('/create',   function (req, res) {
 
     let urlShort = new UrlModel({
         longUrl: req.body.longurl,
@@ -47,10 +47,11 @@ app.post('/create',  function (req, res) {
 })
 app.get('/:urlId',  async function (req, res) {
 
+    
    let url = await UrlModel.findOne({ shortUrl: req.params.urlId }, function (err, data) {
         if (err) throw err
 
-        UrlModel.findByIdAndUpdate({ _id: data.id }, { $inc: { clickCount: 1 } }, function (err, updatedData) {
+        UrlModel.findOneAndUpdate({ _id: data.id }, { $inc: { clickCount: 1 } }, function (err, updatedData) {
             if (err) throw err
             
             res.redirect(data.longUrl)
@@ -62,15 +63,15 @@ app.get('/:urlId',  async function (req, res) {
 })
 
 app.get('/delete/:id', function (req, res) {
-    UrlModel.findByIdAndDelete({ _id: req.params.id }, function (err, deleteData) {
+    UrlModel.findOneAndDelete({ _id: req.params.id }, function (err, deleteData) {
         if (err) throw (err)
         res.redirect('/')
     })
 })
 
 
-app.listen(3000,function(){
-    console.log(`PORT IS RUNNING IN 3000 `);
+app.listen(3001,function(){
+    console.log(`PORT IS RUNNING IN 3001 `);
 })
 
 function generateUrl() {
