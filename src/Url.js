@@ -1,3 +1,5 @@
+
+
 async function shortenUrl() {
     const originalUrl = document.getElementById('originalUrl').value;
   
@@ -6,7 +8,7 @@ async function shortenUrl() {
       return;
     }
   
-    const response = await fetch('/api/shorten', {
+    const response = await fetch('/api/shortenUrl', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
